@@ -1,9 +1,52 @@
+const express = require("express");
+require('dotenv').config();
+
 const SQL = require("./lib/libsql");
 
-console.log('Hello world, gonna try database stuff!');
+const db = new SQL(process.env.HOST, process.env.USER, process.env.PASSWORD, process.env.NAME);
+
+const app = express();
+
+app.use(express.json());
+
+app.get('/users/all', (req, res) => {
+    db.select((error, results) => {
+        if (error) res.status(500).send({message: 'something wrong'})
+
+        res.status(200).send(results)
+    })
+
+});
+
+app.get('/users/name', (req, res) => {
+    db.select((error, results) => {
+        if (error) res.status(500).send({message: 'something wrong'})
+
+        res.status(200).send(results)
+    }, req.body)
+    
+})
+
+app.listen(3000);
 
 /* There's no place like 127.0.0.1 */
-const db = new SQL("127.0.0.1", "root", "PASSWORD", "db");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log('Hello world, gonna try database stuff!');
 // db.select((error, results) => {
 //     if (error) {
 //         throw error
@@ -27,9 +70,9 @@ const db = new SQL("127.0.0.1", "root", "PASSWORD", "db");
 
 // }, "Senior Developer", 1002)
 
-db.delete((error, results) => {
-    if (error) throw error;
-    console.log(results);
-}, 1001)
+// db.delete((error, results) => {
+//     if (error) throw error;
+//     console.log(results);
+// }, 1001)
 
 
