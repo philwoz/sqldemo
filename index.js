@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const SQL = require("./lib/libsql");
 
-const db = new SQL(process.env.HOST, process.env.USER, process.env.PASSWORD, process.env.NAME);
+const db = new SQL("127.0.0.1", "root", "PASSWORD", "db");
 
 const app = express();
 
@@ -11,19 +11,19 @@ app.use(express.json());
 
 app.get('/users/all', (req, res) => {
     db.select((error, results) => {
-        if (error) res.status(500).send({message: 'something wrong'})
+        if (error) res.status(500).send({message: 'something wrong'});
 
-        res.status(200).send(results)
-    })
+        res.status(200).send(results);
+    });
 
 });
 
 app.get('/users/name', (req, res) => {
     db.select((error, results) => {
-        if (error) res.status(500).send({message: 'something wrong'})
+        if (error) res.status(500).send({message: 'something wrong'});
 
-        res.status(200).send(results)
-    }, req.body)
+        res.status(200).send(results);
+    }, req.body);
     
 })
 
