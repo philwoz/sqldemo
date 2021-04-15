@@ -21,10 +21,15 @@ const db = new SQL("127.0.0.1", "root", "PASSWORD", "db");
 //     process.exit();
 // }, ['1000','Developer', 20991232, 20991252 ])
 
-db.update((error, results) => {
+// db.update((error, results) => {
+//     if (error) throw error;
+//     console.log(results);
+
+// }, "Senior Developer", 1002)
+
+db.delete((error, results) => {
     if (error) throw error;
     console.log(results);
-
-}, "Senior Developer", 1002)
+}, 1001)
 
 
