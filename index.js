@@ -1,14 +1,16 @@
-const SQL = require("./lib/libsql");
+const SQL = require("./lib/sql");
 
-console.log("hello world");
+console.log('Hello world, gonna try database stuff!');
 
-const db = new SQL("127.0.0.1", "root", "PASSWORD", "db");
-// parameters to be saved in .env file
-db.select("Laura", (error, results) => {
+/* There's no place like 127.0.0.1 */
+const db = new SQL("127.0.0.1", "root", "PASSWORD", "cactus");
+db.select((error, results) => {
     if (error) {
-        throw error;
+        throw error
     } else {
-        console.log(results);
+        for (let result of results) {
+            console.log(`User is called: ${result.name} and they are ${result.gender}`);
+        }
         process.exit();
     }
 });
